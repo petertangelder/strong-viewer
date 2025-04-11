@@ -1,6 +1,17 @@
 # Orientis Strong viewer
 Tracking progress is an important part of any gym routine. The Strong app is great for logging workout sets, but its built-in progress charts can be hard to read. With this web app, you can export your workout data from Strong and import it here to get clearer, more insightful visualizations of your progress.
 
+👉 **[Try the live demo now](https://orientis.nl/strong)** – No installation needed. Just open it in your browser and start exploring your workout history!
+
+## Using the App
+
+1. In the **Strong app** (version 6), export your workout history as a CSV file.
+2. Open the web app at [https://orientis.nl/strong](https://orientis.nl/strong).
+3. Use the **Upload data** feature to upload your CSV file.
+4. View your progress in interactive line charts.
+
+> 🛡️ **Privacy First**: All data is handled entirely within your browser and never sent to any server. Your workout history stays private and local, nothing is uploaded or stored externally.
+
 # Blazor WebAssembly App
 
 This web application is built using **.NET 9** and the **Blazor WebAssembly** hosting model. It runs entirely client-side in the browser, with all dependent packages included directly in the app rather than referenced separately. The Chart.js library is used to display data in line charts.
