@@ -106,6 +106,12 @@ public class StrongData
                 continue;
             }
 
+            if (setItem.Weight.HasValue && setItem.Weight.Value > 0 && (setItem.Reps ?? 0) == 0 && (setItem.Seconds ?? 0) == 0)
+            {
+                // If the weight is set but reps and seconds are not, we assume the exercise was skipped in this workout
+                continue;
+            }
+
             // Create a new set with the details of the set performed.
             var set = new Set(setOrder, setItem.Weight, "kg", setItem.Reps, (int?)setItem.Seconds);
 
