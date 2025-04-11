@@ -1,0 +1,8 @@
+﻿.chart-tooltip ul {
+    list-style-type: none;
+    padding-left: 0;
+}
+
+.line-chart {
+    height: 300px;
+}

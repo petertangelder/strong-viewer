@@ -1,0 +1,22 @@
+﻿@using Orientis.Strong.Web.Enums
+@using Orientis.Strong.Web.Models
+
+@if (ChartExerciseType == ExerciseType.WeightLifting)
+{
+    <div class="line-chart">
+        <LineChart Id="@Id" Data="@TotalVolumeData"></LineChart>
+    </div>
+}
+@if (ChartExerciseType == ExerciseType.BodyWeight)
+{
+    <div class="line-chart">
+        <LineChart Id="@Id" Data="@TotalRepsData" ShowRightYAxis=false></LineChart>
+    </div>
+}
+@if (ChartExerciseType == ExerciseType.Duration)
+{
+    <div class="line-chart">
+        <LineChart Id="@Id" Data="@TotalSecondsData" ShowRightYAxis=false></LineChart>
+    </div>
+}
+

@@ -1,0 +1,8 @@
+﻿@using Orientis.Strong.Web.Components
+
+<RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Center" AlignItems="AlignItems.Center" Gap="0.5rem" class="rz-p-4">
+    <RadzenLabel Text="Select start date" Component="DatePickerMinMax" />
+    <RadzenDatePicker @bind-Value=@StartDate Min="@MinDate" Max="@MaxDate" Name="DatePickerMinMax" DateFormat="dd-MM-yyyy" Change="DateChanged" DateRender="@DateRender" ></RadzenDatePicker>
+</RadzenStack>
+
+<ExerciseChart Id="exercise-chart" Exercises="FilteredExercises" />

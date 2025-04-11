@@ -1,0 +1,63 @@
+﻿@using Radzen.Blazor.Rendering
+
+@inherits LayoutComponentBase
+
+<style type="text/css">
+    .hint-popup {
+        display: none;
+        position: absolute;
+        left: -300px;
+        top: -100px;
+        overflow: hidden;
+        height: 350px;
+        width: 600px;
+        border: var(--rz-panel-border);
+        background-color: var(--rz-panel-background-color);
+        box-shadow: var(--rz-panel-shadow);
+        border-radius: var(--rz-border-radius)
+    }
+</style>
+
+<RadzenComponents @rendermode="RenderMode.InteractiveWebAssembly" />
+<RadzenLayout style="height: auto;">
+    <RadzenHeader>
+        <span class="logo">
+            <span class="orient-color">ORIENT</span><span class="is-color">IS</span>
+        </span>
+    </RadzenHeader>
+    <RadzenBody>
+        <RadzenStack Orientation="Orientation.Vertical" JustifyContent="JustifyContent.Start" AlignItems="AlignItems.Center" Style="width: 100%">
+            <h1>Strong data viewer</h1>
+            <RadzenText TextStyle="TextStyle.H6">Export your workout data using the Strong app and see your workout results in charts</RadzenText>
+            <RadzenButton @ref=button Text="How it works" Click="@(args => popup.ToggleAsync(button.Element))" />
+            @Body
+        </RadzenStack>
+    </RadzenBody>
+</RadzenLayout>
+
+<Popup @ref=popup Lazy=true class="hint-popup">
+    <RadzenStack Orientation="Orientation.Vertical" JustifyContent="JustifyContent.Start" AlignItems="AlignItems.Center" Style="width: 100%" class="rz-p-12">
+        <RadzenText TextStyle="TextStyle.H6">Take these steps to show your workout data in charts:</RadzenText>
+        <ul>
+            <li>Use version 6 of the Strong app</li>
+            <li>In the Strong app, go to Profile -> Settings -> Export data</li>
+            <li>Upload the exported .csv file here</li>
+            <li>This Strong viewer assumes you are using the metric weight unit (kg)</li>
+            <li>Workouts with the same name are grouped together in a workout plan</li>
+            <li>Workouts with the same name which are more than two months apart from each other, are seen as different workout plans</li>
+            <li>Select a workout and see the charts of all exercises of that workout</li>
+            <li>Click the graph icon next to the exercise name to see a chart of that specific exercise</li>
+        </ul>
+        <RadzenButton Text="Close" Click="@(args => CloseHint())" />
+    </RadzenStack>
+</Popup>
+
+@code {
+    RadzenButton button = null!;
+    Popup popup = null!;
+
+    async Task CloseHint()
+    {
+        await popup.CloseAsync();
+    }
+}

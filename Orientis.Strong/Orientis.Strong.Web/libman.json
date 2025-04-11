@@ -1,0 +1,21 @@
+{
+  "version": "3.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "Chart.js@4.4.1",
+      "destination": "wwwroot/lib/Chart.js/",
+      "files": [
+        "chart.umd.js"
+      ]
+    },
+    {
+      "provider": "filesystem",
+      "library": "D:\\Source\\Repos\\Strong\\Orientis.Strong\\Orientis.Strong.Web\\wwwroot\\lib\\chartjs-adapter-date-fns",
+      "destination": "wwwroot/lib/chartjs-adapter-date-fns/",
+      "files": [
+        "chartjs-adapter-date-fns.bundle.min.js"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,60 @@
+﻿@page "/"
+@using Orientis.Strong.Web.Components
+@using Orientis.Strong.Web.Enums
+@using Orientis.Strong.Web.Models
+@using System.Text.Json
+@using System.Globalization
+@using System.Text.RegularExpressions
+
+<PageTitle>Orientis | Strong Viewer</PageTitle>
+
+<div class="charts">
+    <RadzenCard Variant="Variant.Outlined">
+        <h2>Upload data</h2>
+
+        Upload your data from the Strong app
+        <div>
+            <RadzenUpload Multiple="false" Icon="upload" Change=@OnExportFileUpload Style="width: 100%;max-width: 400px;" InputAttributes="@(new Dictionary<string, object>() { { "aria-label", "select file" } })" />
+        </div>
+        @if (IsUploading)
+        {
+            <RadzenStack class="rz-mt-4">
+                <RadzenProgressBar ProgressBarStyle="ProgressBarStyle.Primary" Value="100" ShowValue="false" Mode="ProgressBarMode.Indeterminate" />
+            </RadzenStack>
+        }
+    </RadzenCard>
+    @if (!string.IsNullOrEmpty(ErrorMessage))
+    {
+        <RadzenCard Variant="Variant.Outlined" class="rz-mt-4">
+            <h2>Something went wrong</h2>
+            <p>@ErrorMessage</p>
+        </RadzenCard>
+    }
+    @if (DataLoaded)
+    {
+        <RadzenCard Variant="Variant.Outlined" class="rz-mt-4">
+            <h2>Workout plan</h2>
+            <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" JustifyContent="JustifyContent.Left" Gap="0.5rem">
+                <RadzenLabel Text="Select workout plan" Component="WorkoutDropDown" />
+                <RadzenDropDown @bind-Value=@SelectedWorkoutPlan Data=@WorkoutPlanNames Style="width: 100%; max-width: 400px;" Name="WorkoutDropDown" Change=@(args => WorkoutPlanSelected(args)) />
+            </RadzenStack>
+        </RadzenCard>
+        @if (!string.IsNullOrEmpty(SelectedWorkoutPlan))
+        {
+            <RadzenCard Variant="Variant.Outlined" class="rz-mt-4">
+                <h2>Exercise charts for @SelectedWorkoutPlan</h2>
+                @if (Exercises != null)
+                {
+                    @foreach (var exercise in Exercises)
+                    {
+                        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Wrap="FlexWrap.Wrap">
+                            <h3>@exercise.Key</h3>
+                            <RadzenButton Click=@(async() => await ShowExerciseDialogAsync(exercise.Key)) Icon="show_chart" ButtonStyle="ButtonStyle.Primary" Size="ButtonSize.ExtraSmall" Style="margin-top: 6px;"/>
+                        </RadzenStack>
+                        <ExerciseChart Id="@GetChartId(exercise.Key)" Exercises="exercise.Value" />
+                    }
+                }
+            </RadzenCard>
+        }
+    }
+</div>
